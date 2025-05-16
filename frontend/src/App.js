@@ -9,13 +9,13 @@ function App() {
   const [route, setRoute] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/events")
+    fetch("https://unam-navigation-backend.onrender.com/events")
       .then(res => res.json())
       .then(setEvents);
   }, []);
 
   const navigateTo = (location) => {
-    fetch(`http://localhost:5000/navigation?from=Gate&to=${encodeURIComponent(location)}`)
+    fetch(`https://unam-navigation-backend.onrender.com/events/navigation?from=Gate&to=${encodeURIComponent(location)}`)
       .then(res => res.json())
       .then(data => setRoute(data.route));
   };
