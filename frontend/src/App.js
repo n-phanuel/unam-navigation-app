@@ -1,7 +1,17 @@
-
 import React, { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+
+// 🔧 Leaflet icon patch for Netlify/Render
+import L from 'leaflet';
+import markerIcon from 'leaflet/dist/images/marker-icon.png';
+import markerShadow from 'leaflet/dist/images/marker-shadow.png';
+
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconUrl: markerIcon,
+  shadowUrl: markerShadow,
+});
 
 function App() {
   const [position, setPosition] = useState([-22.5597, 17.0832]);
@@ -37,7 +47,7 @@ function App() {
       <ul>
         {events.map(e => (
           <li key={e.id}>
-            <strong>{e.name}</strong> at <em>{e.location}</em> 
+            <strong>{e.name}</strong> at <em>{e.location}</em>
             <button onClick={() => navigateTo(e.location)}>Navigate</button>
           </li>
         ))}
